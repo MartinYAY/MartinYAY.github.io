@@ -22,15 +22,15 @@
         <canvas id="canvaslines" width="520" height="520" style="position:relative;background:transparent;left:-260px;top:-260px;"></canvas>
         <div id="ponywrapper"></div>
       </div>
-      <div id="score"><span id="scorenum">0 Smiles</span><div id="SPS">+0.1 per second</div></div>
-      <div class="newsactive"><p><span id="news0" class="inactive">News: stuff</span></p><p><span id="news1" class="inactive">News: other stuff</span></p></div>
+      <div id="score"><span id="scorenum">0 Sonrisas</span><div id="SPS">+0.1 por segundo</div></div>
+      <div class="newsactive"><p><span id="news0" class="inactive">Noticias: cosas pasan</span></p><p><span id="news1" class="inactive">Noticias: otras cosas pasan</span></p></div>
     </div>
   </div>
-  <div class="button" id="menubutton" onclick="ShowMenu(true);">Menu &raquo;</div>
+  <div class="button" id="menubutton" onclick="ShowMenu(true);">Menú &raquo;</div>
   <div id="menu" class="menu">
-  <div class="button" onclick="ShowMenu(false);">Menu &laquo;</div>
-  <div class="button" onclick="EarnAchievement(200); SaveGame()" title="Manually save the game (the game auto-saves every 60 seconds).">Save</div>
-  <div class="button" onclick="EarnAchievement(201); document.getElementById('exportarea').innerHTML = ExportGame(); document.getElementById('exportwindow').style.display='inline-block';">Export</div>
+  <div class="button" onclick="ShowMenu(false);">Menú &laquo;</div>
+  <div class="button" onclick="EarnAchievement(200); SaveGame()" title="Guardar el progreso (se guarda automáticamente cada 60 segundos).">Guardar</div>
+  <div class="button" onclick="EarnAchievement(201); document.getElementById('exportarea').innerHTML = ExportGame(); document.getElementById('exportwindow').style.display='inline-block';">Exportar</div>
   <div class="button" onclick="document.getElementById('credits').style.display='inline-block';">Credits</div>
     <hr/>
     <input type="checkbox" id="EnableEffects" onchange="GetSettings()" />
