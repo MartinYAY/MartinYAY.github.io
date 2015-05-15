@@ -31,32 +31,32 @@
   <div class="button" onclick="ShowMenu(false);">Menú &laquo;</div>
   <div class="button" onclick="EarnAchievement(200); SaveGame()" title="Guardar el progreso (se guarda automáticamente cada 60 segundos).">Guardar</div>
   <div class="button" onclick="EarnAchievement(201); document.getElementById('exportarea').innerHTML = ExportGame(); document.getElementById('exportwindow').style.display='inline-block';">Exportar</div>
-  <div class="button" onclick="document.getElementById('credits').style.display='inline-block';">Credits</div>
+  <div class="button" onclick="document.getElementById('credits').style.display='inline-block';">Créditos</div>
     <hr/>
     <input type="checkbox" id="EnableEffects" onchange="GetSettings()" />
-    <label for="EnableEffects" title="Enables animated canvas effects in the background.">Enable canvas effects</label>
+    <label for="EnableEffects" title="Activa los efectos animados en el fondo.">Activar efectos de fondo</label>
     <br/><input type="checkbox" id="EnableFocus" onchange="GetSettings()" />
-    <label for="EnableFocus" title="Reduces the update frequency of the game when it isn't focused so it uses fewer resources.'">Lower FPS when not focused</label>
+    <label for="EnableFocus" title="Reduce la frecuencia de actualización del juego cuando no se centra por lo que utiliza menos recursos.'">Minimizar uso de FPS</label>
     <br/><input type="checkbox" id="EnableWarn" onchange="GetSettings()" />
-    <label for="EnableWarn" title="Put up a warning message before you close the window.">Warn when closing window</label>
+    <label for="EnableWarn" title="Poner un mensaje de advertencia antes de cerrar la ventana.">Advertencia antes de cerrar ventana</label>
       <hr/>
-      Smiles Available: <span id="stat_cursmiles">0</span>
-      <br/>Total Smiles: <span id="stat_totalsmiles">0</span>
-      <br/>Smiles Per Second: <span id="stat_SPS">0</span>
-      <br/>Pony Clicks: <span id="stat_clicks">0</span>
-      <br/>Smiles Per Click: <span id="stat_SPC">0</span>
-      <br/>Buildings Owned: <span id="stat_buildings">0</span>
-      <br/>Time Played: <span id="stat_time">0</span>
-      <br/>Muffins: <span id="stat_muffins">0</span> <span class="fade" style="display:none;">(<span id="stat_achievementmuffins">0</span> from achievements)</span>
+      Sonrisas Disponibles: <span id="stat_cursmiles">0</span>
+      <br/>Sonrisas Totales: <span id="stat_totalsmiles">0</span>
+      <br/>Sonrisas Por Segundo: <span id="stat_SPS">0</span>
+      <br/>Clicks a Ponis: <span id="stat_clicks">0</span>
+      <br/>Sonrisas Por Click: <span id="stat_SPC">0</span>
+      <br/>Edificios Adquiridos: <span id="stat_buildings">0</span>
+      <br/>Tiempo Jugado: <span id="stat_time">0</span>
+      <br/>Muffins: <span id="stat_muffins">0</span> <span class="fade" style="display:none;">(<span id="stat_achievementmuffins">0</span> de logros)</span>
       <hr/>
       <div class="button" onclick="var x = window.prompt('Paste your exported game data here to import it. WARNING: This will overwrite your current game, even if the data is corrupt! Be sure you export your current game if you don\'t want to lose anything!',''); if(x!==null) { ImportGame(x); }">Import</div>
       <div class="button" onclick="if(window.confirm('This will destroy all your cookies, buildings, and upgrades, but you\'ll keep you\'re achievements and your muffins. Are you sure you want to do this?')) { ResetGame(); }" style="color:#c00">Reset</div>
       <div class="button" onclick="if(window.confirm('This will irreversibly wipe ALL your data, including all settings and all achievements! Are you certain you want to do this?')) { WipeAllData(); }" style="color:#c00">Wipe All Data</div>
       <hr/>
-      Upgrades Owned: <span id="upgrades_owned"></span>/<span id="upgrades_total"></span>
+      Mejoras Adquiridas: <span id="upgrades_owned"></span>/<span id="upgrades_total"></span>
       <div id="upgradelist"></div>
       <hr/>
-      Achievements: <span id="achievements_owned"></span>/<span id="achievements_total"></span>
+      Logros: <span id="achievements_owned"></span>/<span id="achievements_total"></span>
       <div id="achievements"></div>
       <hr/>
       <span style="display:block;font-size:70%;height:40px;"><a href="https://www.youtube.com/watch?v=otAFRGL4yX4" onclick="EarnAchievement(204);" target="_blank">The smile song is mandatory while playing this.</a></span>
@@ -70,9 +70,9 @@
   
   <div id="overlay" class="tooltip" data-item="2"></div>
   <div id="exportwindow" class="modal" style="width: 350px;display:none;margin-top:-150px;">
-    <b>Export Save</b>
+    <b>Exportar Archivo de Guardado</b>
     <hr/>
-    Copy and paste this somewhere safe. To restore your game, click the import button and paste this into the dialog box.
+    Copia y pega esto en un lugar seguro. Para restaurar tu juego, clickea en el botón de importar y copia esto en la caja de diálogo.
     <br/>
     <br/><textarea id="exportarea" style="width:345px;height:150px;" readonly></textarea>
     <hr/>
@@ -173,7 +173,7 @@
     var muffins = Math.floor(inv_triangular(Game.totalsmiles/1000000000000))-1;
     //Game.muffins += muffins;
     //ShowNotice("Game reset", ((muffins==0)?null:"You get <b>" + Pluralize(muffins, " muffin") + "</b> for your <b>" + Pluralize(Game.totalsmiles, " smile") + "</b>"), null);
-    ShowNotice("Game Reset", "Muffin prestige has been temporarily disabled, sorry!");
+    ShowNotice("Reiniciar Juego", "El Prestigio de Muffins ha sido temporalmente desactivado, ¡lo sentimos!");
     Game.store = [1,0,0,0,0,0,0,0,0,0,0,0,0];
     Game.upgrades = [];
     Game.upgradeHash = {};
@@ -194,7 +194,7 @@
         Game = g;
         break;
       default:
-        alert('Unrecognized version! Game not loaded.');
+        alert('¡Versión desconocida! El juego no ha cargado.');
     }
   }
   function ImportGame(src) { 
@@ -217,7 +217,7 @@
   }
   
   function ExportGame() { return JSON.stringify(Game); }
-  function SaveGame() { localStorage.setItem('game', ExportGame()); ShowNotice("Game saved", null, null); }
+  function SaveGame() { localStorage.setItem('game', ExportGame()); ShowNotice("Juego guardado", null, null); }
   function ApplySettings() {
     document.getElementById('EnableEffects').checked = Game.settings.useCanvas;
     document.getElementById('EnableFocus').checked = Game.settings.optimizeFocus;
@@ -232,18 +232,18 @@
   LoadGame();
     
   var Store = [
-    {cost:0,count:1,name:"Pony", plural: "ponies", desc: "This is a pony. Ponies need friendships to generate smiles."}, 
-    {cost:0,count:0,name:"Friendship", plural: "friendships", desc: "A friendship between two ponies. You can't buy a friendship if everypony is friends with everypony else!", formula: "Each friendship generates 1 smile per second"}, 
-    {cost:0,count:0,name:"Recital", plural: "recitals", desc: "A small recital for everypony you know.", formula: "Generates one smile per pony.<i>SPS = P</i>"}, // P
-    {cost:0,count:0,name:"Party", plural: "parties", desc: "Throw a party for all your friends!", formula: "Generates one smile per friendship.<i>SPS = F</i>"}, // F
-    {cost:0,count:0,name:"Parade", plural: "parades", desc: "Throw a big parade for everypony and all their friends!", formula: "Generates two smiles for each friendship and each pony.<i>SPS = 2&times;(P&plus;F)</i>"}, // (P+F)*2.0
-    {cost:0,count:0,name:"Concert", plural: "concerts", desc: "Throw a concert for the whole town!", formula: "Generates one smile for every pony, friendship, and building you have.<i>SPS = P&plus;F&plus;B</i>"}, // P+F+B
-    {cost:0,count:0,name:"Festival", plural: "festivals", desc: "Celebrate a festival for a whole weekend!", formula: "Generates one smile for every pony you have, times the number of friends you have, times 1&frac12;.<i>SPS = P&times;F&times1.5</i>"}, // P*F*1.5
-    {cost:0,count:0,name:"Rave", plural: "raves", desc: "Throw a gigantic rave party in Canterlot!", formula: "Generates one smile for every pony you have, times the number of friendships and buildings you have.<i>SPS = P&times;(F&plus;B)</i>"}, // P*(F+B)
-    {cost:0,count:0,name:"Grand Galloping Gala", plural: "grand galloping galas", desc: "Celebrate the Grand Galloping Gala with ponies from all over Equestria!", formula: "Generates one smile for every pony you have, times the number of friendships you have, times the number of buildings you have.<i>SPS = P&times;F&times;B</i>"}, //P*F*(B+1)
-    {cost:0,count:0,name:"Coronation", plural: "coronations", desc: "Make some random pony a princess so you have an excuse to party all night!", formula: "Generates one smile per friendship, times two for every pony you have, plus the number of buildings you have.<i>SPS = 2<sup>P</sup>&times;F&plus;B</i>"}, //2^P*F+B
-    {cost:0,count:0,name:"National Holiday", plural: "national holidays", desc: "Declare a national holiday so everypony in equestria can party with you instead of being productive!", formula: "Generates one smile per friendship, times the number of buildings you have, times two for every pony you have.<i>2<sup>P</sup>&times;F&times;B</i>"}, //2^P*F*(B+1)
-    {cost:0,count:0,name:"Elements Of Harmony", plural: "Elements of Harmony", desc: "Use a giant rainbow friendship beam to solve all your problems!", formula: "Generates a bajillion smiles for every pony you have, plus one smile per friendship times the number of buildings you own.<i>P!&div;(P-5)! &plus; F&times;B</i>"}, //P!/(P-5)! + F*B
+    {cost:0,count:1,name:"Poni", plural: "ponis", desc: "Un poni. Los ponis necesitan amistades para generar sonrisas."}, 
+    {cost:0,count:0,name:"Amistad", plural: "amistades", desc: "Una amistad entre dos ponis. ¡No podrás comprar una amistad si todos tus ponis ya son amigos!", formula: "Cada amistad genera 1 sonrisa por segundo"}, 
+    {cost:0,count:0,name:"Recital", plural: "recitales", desc: "Un pequeño recital para ponis que conozcas.", formula: "Genera una sonrisa por poni.<i>SPS = P</i>"}, // P
+    {cost:0,count:0,name:"Fiesta", plural: "fiestas", desc: "¡Una fiesta para todos tus amigos!", formula: "Genera una sonrisa por amistad.<i>SPS = F</i>"}, // F
+    {cost:0,count:0,name:"Desfile", plural: "desfiles", desc: "¡Un gran desfile para todos los ponis y sus amigos!", formula: "Genera dos sonrisas por cada amistad y poni.<i>SPS = 2&times;(P&plus;F)</i>"}, // (P+F)*2.0
+    {cost:0,count:0,name:"Concierto", plural: "conciertos", desc: "¡Un concierto para toda la ciudad!", formula: "Genera una sonrisa por cada poni, amistad, y edificio que tengas.<i>SPS = P&plus;F&plus;B</i>"}, // P+F+B
+    {cost:0,count:0,name:"Festival", plural: "festivales", desc: "¡Un festival que dura una semana", formula: "Generates one smile for every pony you have, times the number of friends you have, times 1&frac12;.<i>SPS = P&times;F&times1.5</i>"}, // P*F*1.5
+    {cost:0,count:0,name:"Gran Fiesta", plural: "gran fiestas", desc: "¡Una gran fiesta en Canterlot!", formula: "Generates one smile for every pony you have, times the number of friendships and buildings you have.<i>SPS = P&times;(F&plus;B)</i>"}, // P*(F+B)
+    {cost:0,count:0,name:"Gran Gala del Galope", plural: "gran galas del galope", desc: "¡Celebra la Gran Gala del Galope con ponis de toda Equestria!", formula: "Generates one smile for every pony you have, times the number of friendships you have, times the number of buildings you have.<i>SPS = P&times;F&times;B</i>"}, //P*F*(B+1)
+    {cost:0,count:0,name:"Coronación", plural: "coronaciones", desc: "¡Haz a un poni cualquiera una princesa solo por la fiesta!", formula: "Generates one smile per friendship, times two for every pony you have, plus the number of buildings you have.<i>SPS = 2<sup>P</sup>&times;F&plus;B</i>"}, //2^P*F+B
+    {cost:0,count:0,name:"Festejo Nacional", plural: "festejos nacionales", desc: "¡Declara un festejo nacional para que todos los ponis festejen en vez de ser productivos!", formula: "Generates one smile per friendship, times the number of buildings you have, times two for every pony you have.<i>2<sup>P</sup>&times;F&times;B</i>"}, //2^P*F*(B+1)
+    {cost:0,count:0,name:"Elementos de la Armonía", plural: "Elementos de la Armonía", desc: "¡Usa un gigante rayo arcoiris de la amistad para resolver todos tus problemas!", formula: "Generates a bajillion smiles for every pony you have, plus one smile per friendship times the number of buildings you own.<i>P!&div;(P-5)! &plus; F&times;B</i>"}, //P!/(P-5)! + F*B
     //{cost:0,count:1,name:"DEBUGMOUSE", plural:"DEBUGMOUSES", desc: "DEBUG DO NOT USE"}
   ];
   
@@ -252,27 +252,27 @@
   function max_binomial(n) { var n2=Math.floor(n/2); var r = n; while(--n > n2) { r = r*n; } return Math.floor(r/factorial(n2)); }
   
   var number_names = [
-  "million",
-  "billion",
-  "trillion",
-  "quadrillion",
-  "quintillion",
-  "sextillion",
-  "septillion",
-  "octillion",
-  "nonillion",
-  "decillion",
-  "undecillion",
-  "duodecillion",
-  "tredecillion",
-  "quattuordecillion", // This name is so long it breaks formatting in places :C
-  "quindecillion",
-  "sexdecillion",
-  "septendecillion",
-  "octodecillion",
-  "novendecillion",
-  "vigintillion",
-  "centillion"];
+   "millones",
+   "mil millones",
+   "billones",
+   "cuatrillón",
+   "trillones",
+   "trillones",
+   "septillion",
+   "octillion",
+   "nonillion",
+   "decillion",
+   "undecillones",
+   "duodecillones",
+   "tredecillion",
+   "quattuordecillion", // Este nombre es tan largo que se rompe el formato en lugares: C
+   "quindecillion",
+   "sexdecillion",
+   "septendecillion",
+   "octodecillion",
+   "novendecillion",
+   "vigintillion",
+   "centillion"];
   
   function GetRandNum(min, max) { // Random number in the range [low, high) 
     return Math.floor(Math.random()*(max-min))+min;
@@ -284,54 +284,54 @@
     // These are specific smile count related messages
     if(Game.totalsmiles < 30) {
       news.push(
-        "Ponyville down in the dumps, reports anonymous bystander.",
-        "Ponyville reports distinct lack of smiles.",
-        "Smile forecast for today: Depression with a touch of despair.",
-        "Ponyville in desperate need of excitement.",
-        "Antidepressants selling out all across Ponyville.",
-        "Mayor Mare asked why everyone is feeling so down, reports she can't be bothered to figure it out."
+        "Ponyville en ruinas, informa transeúnte anónimo.",
+        "Ponyville informa clara falta de sonrisas.",
+        "Pronóstico de sonrisas para hoy: Depresión con un toque de desesperación.",
+        "Ponyville en necesidad desesperada de emoción.",
+        "Los antidepresivos se venden en todo Ponyville.",
+        "La Alcaldesa Mare pregunta por qué todos se sienten tan mal, informa que no se molestará en averiguarlo."
       );
     } else if(Game.totalsmiles < 1000) {
-      news.push("Ponyville citizens wonder what this strange new sensation is! Scientists call it 'smiling', conspiracy theorists denounce it as a ploy to take over the world.",
-        "Morose ponies increasingly out of place in chipper Ponyville!",
-        "Small foals spotted playing in the streets! Parents unsure if so called 'fun' should be allowed.",
-        "Chef proposes selling 'baked goods' instead of 'baked okays'. Customers wary of new marketing scam.");
+      news.push("¡Los ciudadanos de Ponyville se preguntan qué es esta extraña y nueva sensación! Los científicos la llaman 'sonreír', teóricos conspirantes lo denuncian como una estratagema para dominar el mundo.",
+        "¡Ponis malhumorados cada vez mas fuera de lugar en la nueva Ponyville!",
+        "¡Se han visto ponis pequeños jugando en las calles! Padres inseguros si la llamada 'diversión' debería estar permitida.",
+        "Mercaderes proponen vender 'bienes económicos' en vez de 'okays económicos'. Los clientes están alerta por estafas de marketing.");
     } else if(Game.totalsmiles < 1000000) {
-      news.push("Ponies greeting each other with a smile! Cranky old ponies decry new development!",
-        "Iron Will now teaching assertiveness instead of methods of coping with depression!",
-        "Several young colts spotted hoofbumping! Parents concerned over new trend!",
-        "Therapist upset about recent mood upswing, says it's bad for business.");
+      news.push("¡Los ponis se saludan con sonrisas en sus rostros! ¡Ponis viejos y irritables lo critican!",
+        "Iron Will ahora enseña asertividad en vez de métodos para hacer frente a la depresión.",
+        "¡Varios ponis jóvenes vistos chocando sus cascos! ¡Padres preocupados por la nueva moda!",
+        "Terapeuta molesto por creciente felicidad en ponis, dice que es malo para el negocio.");
     } else if(Game.totalsmiles < 1000000000) {
-      news.push("Songs now spontaneously erupting across Ponyville!",
-      "Ponyville voted happiest town in equestria!",
-      "Ponies from all over Equestria come to visit Ponyville!");
+      news.push("¡Canciones ahora suenan espontáneamente en Ponyville!",
+      "¡Ponyville elegida como la ciudad más feliz de Equestria!",
+      "¡Ponis de todos lados vienen a visitar Ponyville!");
     } else if(Game.totalsmiles < 1000000000000) {
       news.push(
-        "Princess Twilight found overdosed on friendship, taken to rehab center!",
-        "Citizens of Ponyville so happy they invent new word for it! Debates about how to spell it immediately turn into murderous riots!");
+        "¡Princesa Twilight encontrada con sobredosis de amistad, llevada al centro de rehabilitación!",
+        "¡Los ciudadanos de Ponyville están tan felices que inventaron una nueva palabra para ello! ¡Debates sobre como se escribe llevan inmediatamente a disturbios homicidas!");
     } else if(Game.totalsmiles < 1000000000000000) {
-      news.push("Ponyville citizens suffer from chronic happiness! Doctors unsure if it's actually a problem or not!");
+      news.push("¡Los ciudadanos de Ponyville sufren de felicidad crónica! ¡Médicos dudan si en realidad es un problema o no!");
     } else if(Game.totalsmiles < 1000000000000000000) {
-      news.push("Scientists split friendship and discover a runaway chain reaction! Nuclear friendship bomb proposed by military!");
+      news.push("¡Los científicos dividieron la amistad y descubren una reacción en cadena! ¡Bomba nuclear de amistad propuesta por militares!");
     } else {
-      news.push("New system of physics suggests all matter in universe composed of different kinds of smiles!");
+      news.push("¡Nuevo sistema de la física sugiere toda la materia en el universo esta compuesta de diferentes tipos de sonrisas!");
     }
     
     // After 10000 smiles we start putting in most of the standard news messages into rotation.
     if(Game.totalsmiles > 10000) {
       news.push(
-        'Twilight found shipping Rainbow Dash with everything in the universe! Riots erupt all across Equestria!',
-        'Lyra and BonBon revealed as "just friends"! Ponies everywhere faint in shock!',
-        "Celestia's insatiable desire for cake causes caketastrophe in the Royal Kitchen! A memorial service for the lost chocolate chips to be held on Monday.",
-        "Pink menace at Sugarcube corner goes batty, takes 15 muffins hostage!",
-        "Citizens of Ponyville vote to create a public library instead of relying on a private collection organized by a crazed purple mare!",
-        "Small colt finds lost Apple barn floating in space. Rainbow Dash claims she has no idea how it got up there.",
-        "Rarity joins environmentalists, declares she will no longer go to the spa. Ponyville's spa immediately goes bankrupt.",
-        "Following an incident involving mislabeled sodium and an exploding toilet, Celestia orders Sweetie Bot to register herself as a lethal weapon.",
-        "Rainbow Dash reportedly investing in the Cloud. Pegasi everywhere confused by what this means.",
-        "Princess Twilight discovers that ponies are actually tiny nuclear reactors! \"That explains why I never need to go to the bathroom,\" says Rainbow Dash.",
-        "Pony pony Pony pony pony pony Pony pony!",
-        "Princess Twilight Sparkle dating a peach! The peach has no comment on the matter."
+        '¡Twilight encuentra shipping de Rainbow Dash con todo en el universo! ¡Disturbios en toda Equestria!',
+        '¡Lyra y BonBon son "solo amigas"! ¡Ponis de todos lados entran en shock!',
+        "¡Deseo insaciable por pastel de Celestia causa pastelástrofe en la cocina Real! Una ceremonia en memoria de los chips de chocolate perdidos se celebrará el lunes.",
+        "¡Amenaza rosada en el Sugarcube corner toma por rehenes a 15 muffins!",
+        "¡Ciudadanos de Ponyville votan para crear una biblioteca pública en lugar de confiar en una colección privada organizada por una yegua púrpura enloquecida!",
+        "Pequeño potro encuentra granero Apple flotando en el espacio. Rainbow Dash declara no tener idea de cómo llegó eso allí.",
+        "Rarity se une a los ambientalistas, declara que ya no irá al spa. El spa de Ponyville va inmediatamente a la quiebra.",
+        "A raíz de un incidente de sodio mal etiquetado y un baño que explota, Celestia ordena a Sweetie Bot que se registre como arma letal.",
+        "Según informes, Rainbow Dash invierte repetidamente en la Nube. Pegasos de todo el mundo confundidos.",
+        "¡La Princesa Twilight descubre que los ponis son en realidad reactores nucleares pequeños! \"Eso explica por qué nunca tengo que ir al baño,\" dice Rainbow Dash.",
+        "¡Poni poni poni poni poni poni!",
+        "¡La Princess Twilight Sparkle está saliendo con un melocotón! El melocotón no tiene ningún comentario sobre el asunto."
       );
       
       if(Game.muffins > 10) {
@@ -359,14 +359,14 @@
     var n2 = newsnum;
     document.getElementById('news' + n1).className = '';
     document.getElementById('news' + n2).className = 'inactive';
-    document.getElementById('news' + n1).innerHTML = "News: " + GetNews();
+    document.getElementById('news' + n1).innerHTML = "Noticias: " + GetNews();
   }
   function PrettyNum(x) {
     var d = Math.floor(Math.log10(x));
     if(d<6) return x.toFixed(0);
     x = Math.floor(x/Math.pow(10,d-(d%3)-3));
     var n = Math.floor((d-3)/3) - 1;
-    if(n >= number_names.length) return "Infinity";
+    if(n >= number_names.length) return "Infinidad";
     return (x/1000) + " " + number_names[n];
   }
   function Pluralize(n, s) { return PrettyNum(n) + s + ((n==1)?'':'s'); }
@@ -379,27 +379,27 @@
   function gen_totalsps(sps, store) { var total = 0; for(var i = 0; i < sps.length; ++i) { total += sps[i]*store[i]; } return total; }
   
   var upgradeList = [ {cost:0, name:"UNDEFINED", desc:"ERROR", fn:null},
-    {cost:700, name:"Clicking Assistants", desc: "Clicking gets +1 SPC for every pony you have.", fn:function(sps,store){return gen_upgradetype2(sps, store[0], 1, 0);} },
-    {cost:7000, name:"Friendship is Clicking", desc: "Clicking gets +1 SPC for every friendship you have.", fn:function(sps,store){return gen_upgradetype2(sps, store[1], 1, 0);} },
-    {cost:70000, name:"Ticklish Cursors", desc: "Clicking gets 1% of your SPS.", fn:function(sps,store){return gen_upgradetype2(sps, gen_totalsps(sps, store), 0.01, 0); }},
-    {cost:700000, name:"Feathered Cursors", desc: "Clicking gets 2% of your SPS.", fn:function(sps,store){return gen_upgradetype2(sps, gen_totalsps(sps, store), 0.02, 0); }},
-    {cost:8000000, name:"Advanced Tickle-fu", desc: "Clicking gets 3% of your SPS.", fn:function(sps,store){return gen_upgradetype2(sps, gen_totalsps(sps, store), 0.03, 0); }},
-    {cost:90000000, name:"Happiness Injection", desc: "Clicking gets 4% of your SPS.", fn:function(sps,store){return gen_upgradetype2(sps, gen_totalsps(sps, store), 0.04, 0); }},
-    {cost:10000, name:"Friendship Is Magic", desc: "Friendships generate +1 SPS for every other friendship.", fn:gen_upgradetype1(1, 1, 0) },
-    {cost:1000000, name:"Friendship Is Spellcraft", desc: "Friendships generate +10 SPS for every other friendship.", fn:gen_upgradetype1(1, 10, 0) },
-    {cost:100000000, name:"Friendship Is Sorcery", desc: "Friendships generate +100 SPS for every other friendship.", fn:gen_upgradetype1(1, 100, 0) },
-    {cost:10000000000, name:"Friendship Is Witchcraft", desc: "Friendships generate +1000 SPS for every other friendship.", fn:gen_upgradetype1(1, 1000, 0) },
-    {cost:1000000000000, name:"Friendship Is Benefits", desc: "Friendships generate +10000 SPS for every other friendship.", fn:gen_upgradetype1(1, 10000, 0) },
-    {cost:7777777, name:"I just don't know what went wrong!", desc: "You gain +0.1% SPS for every muffin you have.", fn:gen_muffinupgrade(0, 0.001) },
-    {cost:777777777, name:"That one mailmare", desc: "You gain +0.2% SPS for every muffin you have.", fn:gen_muffinupgrade(0, 0.002) },
-    {cost:77777777777, name:"Derpy Delivery Service", desc: "You gain +0.3% SPS for every muffin you have.", fn:gen_muffinupgrade(0, 0.003) },
-    {cost:7777777777777, name:"Blueberry Muffins", desc: "You gain +0.4% SPS for every muffin you have.", fn:gen_muffinupgrade(0, 0.004) },
-    {cost:777777777777777, name:"Chocolate-chip Muffins", desc: "You gain +0.5% SPS for every muffin you have.", fn:gen_muffinupgrade(0, 0.005) },
-    {cost:77777777777777777, name:"Lemon Muffins", desc: "You gain +0.6% SPS for every muffin you have.", fn:gen_muffinupgrade(0, 0.006) },
-    {cost:7777777777777777777, name:"Poppy seed Muffins", desc: "You gain +0.7% SPS for every muffin you have.", fn:gen_muffinupgrade(0, 0.007) },
-    {cost:777777777777777777777, name:"Muffin Bakeries", desc: "You gain +0.8% SPS for every muffin you have.", fn:gen_muffinupgrade(0, 0.008) },
-    {cost:77777777777777777777777, name:"Designer Muffins", desc: "You gain +0.9% SPS for every muffin you have.", fn:gen_muffinupgrade(0, 0.009) },
-    {cost:7777777777777777777777777, name:"Muffin Factories", desc: "You gain +1% SPS for every muffin you have.", fn:gen_muffinupgrade(0, 0.01) },
+    {cost:700, name:"Asistente de Clicks", desc: "Clicking gets +1 SPC for every pony you have.", fn:function(sps,store){return gen_upgradetype2(sps, store[0], 1, 0);} },
+    {cost:7000, name:"Los Clicks de la Amistad", desc: "Clicking gets +1 SPC for every friendship you have.", fn:function(sps,store){return gen_upgradetype2(sps, store[1], 1, 0);} },
+    {cost:70000, name:"Cosquillacursores", desc: "Clicking gets 1% of your SPS.", fn:function(sps,store){return gen_upgradetype2(sps, gen_totalsps(sps, store), 0.01, 0); }},
+    {cost:700000, name:"Cursores Emplumados", desc: "Clicking gets 2% of your SPS.", fn:function(sps,store){return gen_upgradetype2(sps, gen_totalsps(sps, store), 0.02, 0); }},
+    {cost:8000000, name:"Cosqui-fu Avanzado", desc: "Clicking gets 3% of your SPS.", fn:function(sps,store){return gen_upgradetype2(sps, gen_totalsps(sps, store), 0.03, 0); }},
+    {cost:90000000, name:"Inyección de Felicidad", desc: "Clicking gets 4% of your SPS.", fn:function(sps,store){return gen_upgradetype2(sps, gen_totalsps(sps, store), 0.04, 0); }},
+    {cost:10000, name:"La Magia de la Amistad", desc: "Friendships generate +1 SPS for every other friendship.", fn:gen_upgradetype1(1, 1, 0) },
+    {cost:1000000, name:"Los Conjuros de la Amistad", desc: "Friendships generate +10 SPS for every other friendship.", fn:gen_upgradetype1(1, 10, 0) },
+    {cost:100000000, name:"La Brujería de la Amistad", desc: "Friendships generate +100 SPS for every other friendship.", fn:gen_upgradetype1(1, 100, 0) },
+    {cost:10000000000, name:"La Amistad es Brujería Sobrenatural", desc: "Friendships generate +1000 SPS for every other friendship.", fn:gen_upgradetype1(1, 1000, 0) },
+    {cost:1000000000000, name:"La Amistad con Beneficios", desc: "Friendships generate +10000 SPS for every other friendship.", fn:gen_upgradetype1(1, 10000, 0) },
+    {cost:7777777, name:"¡Yo no se qué salió mal!", desc: "You gain +0.1% SPS for every muffin you have.", fn:gen_muffinupgrade(0, 0.001) },
+    {cost:777777777, name:"Esa Poni Cartera", desc: "You gain +0.2% SPS for every muffin you have.", fn:gen_muffinupgrade(0, 0.002) },
+    {cost:77777777777, name:"Servicio de Entrega de Derpy", desc: "You gain +0.3% SPS for every muffin you have.", fn:gen_muffinupgrade(0, 0.003) },
+    {cost:7777777777777, name:"Muffins de Arándano", desc: "You gain +0.4% SPS for every muffin you have.", fn:gen_muffinupgrade(0, 0.004) },
+    {cost:777777777777777, name:"Muffins con Chips de Chocolate", desc: "You gain +0.5% SPS for every muffin you have.", fn:gen_muffinupgrade(0, 0.005) },
+    {cost:77777777777777777, name:"Muffins de Limón", desc: "You gain +0.6% SPS for every muffin you have.", fn:gen_muffinupgrade(0, 0.006) },
+    {cost:7777777777777777777, name:"Muffins con Semillas de Amapola", desc: "You gain +0.7% SPS for every muffin you have.", fn:gen_muffinupgrade(0, 0.007) },
+    {cost:777777777777777777777, name:"Panaderías de Muffins", desc: "You gain +0.8% SPS for every muffin you have.", fn:gen_muffinupgrade(0, 0.008) },
+    {cost:77777777777777777777777, name:"Muffins de Diseñador", desc: "You gain +0.9% SPS for every muffin you have.", fn:gen_muffinupgrade(0, 0.009) },
+    {cost:7777777777777777777777777, name:"Fábrica de Muffins", desc: "You gain +1% SPS for every muffin you have.", fn:gen_muffinupgrade(0, 0.01) },
     //{cost:50000, name:"Upgrade 3", desc: "Parties generate +1 SPS for every other party.", fn:gen_upgradetype1(2, 1, 0) }
   ];
   
@@ -411,15 +411,15 @@
   curUpgradeList = [];
   
   var achievementList = {
-    '1': { name:"Participation Award", desc: "You moved the mouse!", muffins:0},
-    '2': { name:"Hi there!", desc: "Click a pony <b>once</b>.", muffins:0, cond:function(){ return Game.clicks > 0; } }, 
-    '200': { name:"Cautious", desc: "Manually save the game.", muffins:1},
-    '201': { name:"Paranoid", desc: "Export a save.", muffins:1},
-    '202': { name:"Time Machine", desc: "Import a save.", muffins:1},
-    '203': { name:"Narcissism!", desc: "Click the image of Cloud Hop on the credits page.", muffins:1},
-    '204': { name:"Music Makes Everything Better", desc: "Listen to the smile song.", muffins:1},
-    '205': { name:"You Monster", desc: "Sell a friendship.", muffins:1},
-    '255': { name:"Completionist", desc: "Get all the achievements.", muffins:100}
+    '1': { name:"Premio a la Participación", desc: "¡Has movido el ratón!", muffins:0},
+    '2': { name:"¡Hola hola!", desc: "Clickea un poni <b>una vez</b>.", muffins:0, cond:function(){ return Game.clicks > 0; } }, 
+    '200': { name:"Prudente", desc: "Guarda el juego manualmente.", muffins:1},
+    '201': { name:"Paranoico", desc: "Exporta un archivo de guardado.", muffins:1},
+    '202': { name:"Máquina del Tiempo", desc: "Importa un archivo de guardado.", muffins:1},
+    '203': { name:"¡Narcisismo!", desc: "Clickea en la imagen de Cloud Hop en la página de créditos.", muffins:1},
+    '204': { name:"La Música lo hace todo mejor", desc: "Escucha la Canción de la Sonrisa.", muffins:1},
+    '205': { name:"Monstruo", desc: "Vende una amistad.", muffins:1},
+    '255': { name:"Perfeccionista", desc: "Consigue todos los logros.", muffins:100}
   };
   
   function genAchievements(names, amounts, descgen, condgen) {
@@ -436,14 +436,14 @@
   
   var achievementCount = 3;
   var achievements_clicks = genAchievements(
-    ["That tickles!", "Tickle War", "Tickle War II: The Retickling", "This Can't Be Healthy", "Carpal Tunnel Syndrome", "Wrist In Pieces", "Clickception"],
+    ["¡Cosquillas!", "Guerra de Cosquillas", "Guerra de Cosquillas II: El Recosquilleo", "Esto No Puede Ser Saludable", "Síndrome del Túnel Carpiano", "Muerte de Muñeca", "Clickception"],
     [10,100,1000,10000,100000,1000000,10000000],
     function(n) { return "Click a pony <b>"+PrettyNum(n)+"</b> times."; },
     function(n) { return function() { return Game.clicks >= n; }; });
   achievements_clicks.push(2);
     
   var achievements_smiles = genAchievements(
-    ["Laughter", "Joy", "Bliss", "Nirvana", "Ecstasy", "Pursuit of Happyness", "You Can Stop Now", "This Is Ridiculous", "Go Read A Book", "How?!"],
+    ["Risa", "Alegría", "Felicidad", "Nirvana", "Éxtasis", "Búsqueda de la Felicidad", "Ya no Podrás Parar", "Esto es Ridículo", "Ve a Leer un Libro", "¡¿Cómo?!"],
     [100,10000,1000000,100000000,10000000000,1000000000000,100000000000000,10000000000000000,1000000000000000000,100000000000000000000],
     function(n) { return "Get <b>"+PrettyNum(n)+"</b> smiles."; },
     function(n) { return function() { return Game.totalsmiles >= n; }; });
@@ -457,23 +457,23 @@
     return genAchievements(
     names,
     [1, 50, 100, 200, 300],
-    function(n) { return "Buy <b>"+Pluralize(n, "</b> " + Store[item].name.toLowerCase()) + "."; },
+    function(n) { return "Comprar <b>"+Pluralize(n, "</b> " + Store[item].name.toLowerCase()) + "."; },
     genShopCond(item));
   }
   
-  achievements_shop = achievements_shop.concat(genShopAchievements(2, ["Hobbyist", "Street Musician", "Performer", "Multi-instrumentalist", "Conductor"]));
-  achievements_shop = achievements_shop.concat(genShopAchievements(3, ["Extrovert", "Socialite", "Party Cannon", "Life Of The Party", "Pinkie Pie"]));
-  achievements_shop = achievements_shop.concat(genShopAchievements(4, ["Float Attendee", "Giant Floating Rainbow Dash", "Way Too Much Confetti", "Mane Attraction", "Mayor Mare"]));
-  achievements_shop = achievements_shop.concat(genShopAchievements(5, ["Piano Solo", "String Quartet", "Chamber Choir", "70 Piece Orchestra", "Octavia"]));
-  achievements_shop = achievements_shop.concat(genShopAchievements(6, ["Summer Sun Celebration", "Running Of The Leaves", "Winter Wrap Up", "Hearth's Warming Eve", "Rite Of Spring"]));
-  achievements_shop = achievements_shop.concat(genShopAchievements(7, ["Enthusiast", "Headbanger", "Glowsticks For Everypony!", "Bass Pumper", "DJ Pon3"]));
-  achievements_shop = achievements_shop.concat(genShopAchievements(8, ["Best Night Ever", "Aristocracy", "Ballroom Dance", "YOU'RE GOING TO LOVE ME!", "Really Boring"]));
-  achievements_shop = achievements_shop.concat(genShopAchievements(9, ["Princess Twilight", "Prince Shining Armor", "Princess Big Mac", "Princess Derpy", "Everypony's a Princess!"]));
-  achievements_shop = achievements_shop.concat(genShopAchievements(10, ["Nightmare Night", "Mother's Day", "Farmer's Day", "Rainbow Dash Is Awesome Day", "National Butt Day"]));
+  achievements_shop = achievements_shop.concat(genShopAchievements(2, ["Aficionado", "Músico de Calle", "Artista", "Multi-instrumentista", "Conductor"]));
+  achievements_shop = achievements_shop.concat(genShopAchievements(3, ["Extrovertido", "Sociable", "Cañon de Fiesta", "Alma de la Fiesta", "Pinkie Pie"]));
+  achievements_shop = achievements_shop.concat(genShopAchievements(4, ["Flotador Asistente", "Rainbow Dash Gigante Flotante", "Demasiado Conffetti", "Atracción Principal", "Alcaldesa Mare"]));
+  achievements_shop = achievements_shop.concat(genShopAchievements(5, ["Solo de Piano", "Cuarteto de Cuerdas", "Coro de Cámara", "Orquesta de 70 Piezas", "Octavia"]));
+  achievements_shop = achievements_shop.concat(genShopAchievements(6, ["Celebración del Sol de Verano", "Carrera de las Hojas", "Envolviendo el Invierno", "Noche de los Corazones Cálidos", "Consagración de la Primavera"]));
+  achievements_shop = achievements_shop.concat(genShopAchievements(7, ["Entusiasta", "Muevecabeza", "¡Luces Químicas Para Todos!", "Bass Pumper", "DJ Pon3"]));
+  achievements_shop = achievements_shop.concat(genShopAchievements(8, ["La Mejor Noche", "Aristocracia", "Baile en el Salón", "¡TODOS VAN A QUERERME!", "Realmente Aburrido"]));
+  achievements_shop = achievements_shop.concat(genShopAchievements(9, ["Princesa Twilight", "Príncipe Shining Armor", "Princesa Big Mac", "Princesa Derpy", "¡Todopony es Princesa!"]));
+  achievements_shop = achievements_shop.concat(genShopAchievements(10, ["Noche de Nightmare", "Día de la Madre", "Día del Padre", "Día de Rainbow Dash es Asombrosa", "Día del Trasero"]));
   achievements_shop = achievements_shop.concat(genAchievements(
-    ["Loyalty", "By Your Powers Combined", "Honesty", "Laughter", "Generosity", "Kindness"],
+    ["Lealtad", "Por Tus Poderes Combinados", "Honestidad", "Risa", "Generosidad", "Amabilidad"],
     [1, 6, 50, 100, 200, 300],
-    function(n) { return "Buy <b>"+Pluralize(n, "</b> " + Store[11].name.toLowerCase()) + "."; },
+    function(n) { return "Comprar <b>"+Pluralize(n, "</b> " + Store[11].name.toLowerCase()) + "."; },
     genShopCond(11)));
     
   achievementCount += 7; // for our special ones at the end
